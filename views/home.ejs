@@ -21,6 +21,11 @@ launch=function(){
     console.log(ee)
      socket.emit('MOTOR_ID', ee);
  }
+launch2=function(){
+
+
+     socket.emit('SOS',"OK");
+ }
 
 });
  
@@ -33,3 +38,4 @@ launch=function(){
  <button type="button" onclick="launch()">Click Me!</button>
 <p>Motor adresse: </p>
 <p id="adre">Pas d'adresse</p>
+ <button type="button2" onclick="launch2()">Click Me!</button>

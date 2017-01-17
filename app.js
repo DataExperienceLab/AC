@@ -8,7 +8,8 @@ var Web3 = require("web3")
 
 var app = express();
 
-web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
+//web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
+web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 web3.net.peerCount //verify that the node is connnected to at least 1 peer, if not: panic
 web3.eth.syncing // if result = "false" we are good to go; if not: you can still make the calls but the blockchain won't be up to date// 
 
@@ -108,18 +109,25 @@ EventChanged = MotorLedgerInstance.MotorChanged({},{fromBlock: 0, toBlock: 'late
   console.log(vilebrequinAddress)
 
 
-EventReplaced = MotorInstance.PartReplaced({},{fromBlock: 0, toBlock: 'latest'})
-EventAdded = MotorLedgerInstance.MotorAdded({},{fromBlock: 0, toBlock: 'latest'})
-EventChanged = MotorLedgerInstance.MotorChanged({},{fromBlock: 0, toBlock: 'latest'})
+global.EventReplaced = MotorInstance.PartReplaced({},{fromBlock: 0, toBlock: 'latest'})
+global.EventAdded = MotorLedgerInstance.MotorAdded({},{fromBlock: 0, toBlock: 'latest'})
+global.EventChanged = MotorLedgerInstance.MotorChanged({},{fromBlock: 0, toBlock: 'latest'})
 
 // ######### Displaying the MotorLedger past events
 
 
 
-console.log(EventAdded.get())
+
 
 
 });
+
+  socket.on('SOS', function (data) {
+  console.log(data)
+    console.log(EventAdded.get())
+    console.log(EventChanged.get())
+   console.log(EventReplaced.get()) 
+  })
 });
 
 server.listen(80)
